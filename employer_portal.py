@@ -7,7 +7,7 @@ import xml.etree.ElementTree as ET
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:password@localhost/projectdb'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:sneha3010@localhost/projectdb'
 db = SQLAlchemy(app)
 
 employee_id = '1'
@@ -34,9 +34,19 @@ def before_request():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+	f = open("log1.txt", "a+")
+	f.write("method: GET \nEnd-point: http://127.0.0.1:8001/login \nparameters: None\n" )
+	f.close()
+	# Employee_details1 = Employee_details.query.filter_by(username=username),first()
+	
 	session.pop('user', None)
 
 	if request.method == 'POST':
+		f = open("log1.txt", "a+")
+		f.write("method: POST \nEnd-point: http://127.0.0.1:8001/login \nparameters: username: "+request.form['username']+", password:  ")
+		f.close()
+		# for i in range(1):
+		# 	f.write("POST, http://127.0.0.1:8001/login, username: "+request.form['username']+", password: "+request.form['password']+" %d\r\n" % (i))
 		emppass = request.form
 		username = request.form['username']
 		get_emp = Employee_details.query.filter_by(username=username).first()
@@ -53,6 +63,7 @@ def login():
 		for elem in root:
 			salt = elem.text
 
+
 		if get_emp is None:
 			error = 'User not present! Try again.'
 			return render_template('login.html', error = error)
@@ -62,14 +73,23 @@ def login():
 		else:
 			session['user'] = username
 			return redirect(url_for('addEmployer',  username=session['user']))
+		
+		
 
 	return render_template('login.html')
 
 
 @app.route('/employer_form/<string:username>', methods=['POST','GET'])
 def addEmployer(username):
+	f = open("log1.txt", "a+")
+	f.write("method: GET \nEnd-point: http://127.0.0.1:8001//employer_form/<string:username> \nparameters: None\n" )
+	f.close()
+
 
 	if g.user == username and request.method == 'POST':
+		f = open("log1.txt", "a+")
+		f.write("method: POST \nEnd-point: http://127.0.0.1:8001//employer_form/<string:username> \nparameters: username: "+request.form['username']+", application_no: "+request.form['application_no']+", mbr_web_service: "+request.form['mbr_web_service']+" ")
+		f.close()
 
 		employee = Employee_details()
 		employerDetails = request.form
@@ -106,6 +126,9 @@ def addEmployer(username):
 
 @app.route('/logout', methods=['GET'])
 def logout():
+	f = open("log1.txt", "w+")
+	f.write("method: GET \nEnd-point: http://127.0.0.1:8001/logout \nparameters: logged out\n" )
+	f.close()
 	session.pop('user', None)
 	return redirect(url_for('login'))
 
