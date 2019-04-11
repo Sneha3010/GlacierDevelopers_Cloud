@@ -1,24 +1,9 @@
-{% extends "layout.html"%}
-{% block body %}
+<form method="POST" action="">
+	User name <input type="text" name="username"/>
+	<br>
+	Password <input type="text" name="password"/>
+	<br>
+	<input type="submit">
+</form>	
 
 
-
-<div class="container-fluid">
-	<div class = "card col-md-4 offset-md-4 shadow-lg p-3 mb-5 bg-white rounded">
-	<h1> Real Estate </h1>
-	<h2> List of Properties: </h2>
-	<form action="" method="POST">
-		<form action="" method="POST">
-		<div class="form-group">
-
-
-
- {% for re_Details in realestate %}
-
-    <a href="{{ url_for('.property', M1sID=re_Details.M1sID, Value=re_Details.Value) }}"> {{re_Details.M1sID}} </a> <br>
-    
-  {% endfor %}
-   
-  </div>
-</div>
-{% endblock %}
