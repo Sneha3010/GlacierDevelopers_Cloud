@@ -1,0 +1,34 @@
+{% extends "layout.html"%}
+{% block body %}
+
+<div class="container-fluid"  class="align-left">
+	<div class = "card col-md-15 offset-md-4 shadow-lg p-3 mb-5 bg-white rounded ">
+	<h1> Application Status </h1>
+	<body>
+
+		<table border=1>
+			<th>Name</th><th>address</th><th>Phone NO.</th>
+			<th>Employer Name</th><th>Salary</th><th>Mortgage_Value</th><th>M1SID</th><th>Start Date</th><th>Mortgage ID</th><th>Insurance Value</th><th>Deductible Value </th><th>Applicaiton Status</th>
+			<tr></tr>
+						 
+				<td>{{mo.name}}</td>
+				<td>{{mo.address}}</td>
+				<td>{{mo.phone_number}}</td>
+				<td>{{mo.employer_info}}</td>
+				<td>{{mo.salary}}</td>
+				<td>{{mo.mortgage_value}}</td>
+				<td>{{mo.M1sid}}</td>
+				<td>{{mo.start_date}}</td>
+				<td>{{mo.mort_id}}</td>
+				<td>{{ins_value}}</td>
+				<td>{{ded_value}}</td>
+				<td>{{mo.application_status}}</td>
+			
+
+			
+		</table>
+		
+	</body>
+  </div>
+	
+{% endblock %}
