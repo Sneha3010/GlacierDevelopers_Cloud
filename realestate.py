@@ -7,8 +7,8 @@ import logging
 app = Flask(__name__)
 
 # Connecting to database
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:sneha3010@localhost/cloudproject'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:sneha3010@localhost/projectdb'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:sneha3010@localhost/cloudproject'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:sneha3010@localhost/projectdb'
 db = SQLAlchemy(app)
 
 class re_Details(db.Model):
@@ -62,10 +62,10 @@ def get_Properties():
 	f.close()
 	realestate=re_Details.query.all()
 
-	for real in realestate:
-		print(real.M1sID)
-		print(real.Value)
-	return render_template('index.html', realestate=re_Details.query.all())
+	# for real in realestate:
+	# 	print(real.M1sID)
+	# 	print(real.Value)
+	return render_template('re_index.html', realestate=re_Details.query.all())
 
 @app.route('/property/<string:M1sID>/<string:Value>', methods=['GET', 'POST'])
 def property(M1sID, Value):
@@ -82,12 +82,12 @@ def property(M1sID, Value):
 		r = requests.get(str('http://127.0.0.1:8004/insurance')+'?Name='+str(Name)+ '&Value='+str(get_user.Value)+'&M1sID='+str(get_user.M1sID) )
 		if r.text == 'success':
 			message = 'Employee details submitted sucessfully to MBR portal.'
-			return render_template('updatestatus.html', message=message)
+			return render_template('re_updatestatus.html', message=message)
 		else:
 			return "<h1> details updated. </h1>"
 
 	
-	return render_template('property.html', M1sID=M1sID, Value=Value)
+	return render_template('re_property.html', M1sID=M1sID, Value=Value)
 
 
 
