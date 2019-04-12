@@ -36,7 +36,15 @@ def home():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+	f = open("log2.txt", "w+")
+	f.write("method: GET \nEnd-point: http://127.0.0.1:8000/login \nparameters: None\n" )
+	f.close()
 	if request.method == 'POST':
+
+		f = open("log2.txt", "w+")
+		f.write("Method: POST \nEndpoint: http://127.0.0.1.8000/login, \nParameters: userid: "+request.form['userid']+", name: "+request.form['name']+" \r\n\n\n")
+		f.close()
+
 		userid = request.form['name']
 		get_user = Mortgage_details.query.filter_by(name=userid).first()
 		password = request.form['password']
@@ -59,7 +67,16 @@ def login():
 
 @app.route('/mbr/registration', methods=['GET', 'POST'])
 def addEmployer():
+
+	f = open("log2.txt", "w+")
+	f.write("method: GET \nEnd-point: http://127.0.0.1:8000/mbr/registration \nparameters: None\n" )
+	f.close()
 	if request.method == 'POST':
+
+		f = open("log2.txt", "w+")
+		f.write("Method: POST \nEndpoint: http://127.0.0.1.8000/mbr/registration, \nParameters: address: "+request.form['address']+", name: "+request.form['name']+", contact_no: "+request.form['contact_no']+", employer_name: "+request.form['employer_name']+" \r\n\n\n")
+		f.close()
+
 	 	mbr=Mortgage_details()
 
 	 	mbrDetails = request.form
@@ -81,6 +98,11 @@ def addEmployer():
 
 @app.route('/mbr/application_status', methods=['GET'])
 def addEmployeeDetails():
+	f = open("log.txt2", "w+")
+	f.write("Method: GET \nEndpoint: http://127.0.0.1.8000/mbr/application_status, \nParameters: [salary: "+salary+", aplication_number: "+application_number+", emp_name: "+emp_name+", emp_start_date: "+emp_start_date+" ] \r\n\n\n")
+	f.close()
+
+
 	salary = request.args['salary']
 	aplication_number = request.args['application_number']
 	name = request.args['emp_name']
@@ -97,8 +119,17 @@ def addEmployeeDetails():
 	return 'success'
 
 @app.route('/mbr/mortgage_request', methods=['GET','POST'])
+
 def addMortgageRequest():
+	f = open("log2.txt", "w+")
+	f.write("method: GET \nEnd-point: http://127.0.0.1:8000/mbr/mortgage_request \nparameters: None\n" )
+	f.close()
 	if request.method == 'POST':
+
+		f = open("log2.txt", "w+")
+		f.write("Method: POST \nEndpoint: http://127.0.0.1.8000/mbr/mortgage_request, \nParameters: name: "+request.form['name']+", mortgage_value: "+request.form['mortgage_value']+" \r\n\n\n")
+		f.close()
+
 		mbrDetails=request.form
 		name = request.form['name']
 		mortgage_value = request.form['mortgage_value']
@@ -124,6 +155,9 @@ def addMortgageRequest():
 
 @app.route('/mbr/insurance', methods=['GET', 'POST'])
 def addInsurance():
+	f = open("log.txt2", "w+")
+	f.write("Method: GET \nEndpoint: http://127.0.0.1.8000/mbr/insurance, \nParameters: [ins_value: "+ins_value+", ded_value: "+ded_value+", name: "+name+", misid: "+misid+" ] \r\n\n\n")
+	f.close()
 	ins_value = request.args['ins_value']
 	ded_value = request.args['ded_value']
 	name = request.args['name']
